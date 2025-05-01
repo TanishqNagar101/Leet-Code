@@ -11,7 +11,7 @@ public:
     void deleteNode(ListNode* node) {
         auto curr = node;
         auto next = node->next;
-        while(curr->next != NULL){
+        while(true){
             curr->val = next->val;
             if(next->next == NULL){
                 curr->next = NULL;
