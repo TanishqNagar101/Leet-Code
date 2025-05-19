@@ -20,7 +20,7 @@ public:
         return cache[k];
     }
     int climbStairs(int n) {
-        vector<int> v(100,-1);
+        vector<int> v(46,-1);
         return foo(n,v);
     }
 };
