@@ -20,12 +20,17 @@ public:
         return cache[k];
     }
     int climbStairs(int n) {
-        vector<int> v(46,0);
-        v[1] = 1;
-        v[2] = 2;
+        if(n<=0) return 0;
+        int first = 1;
+        if(n == 1) return first;
+        int second = 2;
+        if(n == 2) return second;
+        int third {0};
         for(int i = 3;i<=n;i++){
-            v[i] = v[i-1]+v[i-2];
+            third = first+second;
+            first = second;
+            second = third;
         }
-        return v[n];
+        return third;
     }
 };
