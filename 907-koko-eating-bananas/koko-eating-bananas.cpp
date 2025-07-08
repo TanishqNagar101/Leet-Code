@@ -4,7 +4,7 @@ public:
         long long sum{0};
         if(s<=0) return INT_MAX;
         for(int i:piles){
-            sum+=ceil(static_cast<double>(i)/s);
+            sum+=((long long)i + s - 1)/s;
         }
         return sum;
     }
