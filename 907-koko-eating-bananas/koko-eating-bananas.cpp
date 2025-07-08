@@ -10,7 +10,7 @@ public:
     }
     int minEatingSpeed(vector<int>& piles, int h) {
         int n=piles.size();
-        int low{0};
+        int low{1};
         long long high=*max_element(piles.begin(),piles.end()),ans=high;
         // cout<<high<<endl;
         while(low<=high){
