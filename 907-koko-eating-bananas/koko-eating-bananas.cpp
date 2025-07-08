@@ -3,7 +3,7 @@ public:
     long long totalHours(vector<int>& piles, int s){
         long long sum{0};
         if(s<=0) return INT_MAX;
-        for(float i:piles){
+        for(int i:piles){
             sum+=ceil(static_cast<double>(i)/s);
         }
         return sum;
