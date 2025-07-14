@@ -5,7 +5,7 @@ public:
         int low{0},high{n-1};
         while(low<=high){
             int mid = low+((high-low)/2);
-            int diff = arr[mid]-(mid+1);
+            int diff = arr[mid]-mid-1;
             if(diff >= k) high = mid-1;
             else low = mid+1;
         }
