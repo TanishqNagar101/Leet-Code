@@ -1,41 +1,41 @@
 class Solution {
 public:
-    int validWeight(vector<int>& nums,int s,int d){
-        int sum{0},ans{0};
-        for(int i=0;i<nums.size();i++){
-            sum+=nums[i];
-            if(sum==s){
-                sum=0;
+
+    bool isValid(vector<int>& arr, int sum, int k){
+        int ans=0,s=0,m=0;
+        for(int i:arr){
+            s+=i;
+            if(s>=sum){
                 ans++;
-            }
-            else if(sum>s){
-                sum=0;
-                ans++;
-                sum = nums[i];
+                if(s>sum){
+                    m=max(m,s);
+                    s=i;
+                }
+                else s=0;
             }
         }
-        if(sum>0)ans++;
-        return ans>d?-1:ans;
-        
+        if(s>0) ans++;
+        return ans<=k;
     }
-    int splitArray(vector<int>& weights, int days) {
-        int total_sum{0},m{INT_MIN};
-        for(int i:weights){
-            total_sum+=i;
-            m=max(i,m);
+    int splitArray(vector<int>& nums, int k) {
+        int n = nums.size();
+        if(k >n) return -1;
+        int high = 0,low = -1;
+        for(int i:nums){
+            low = max(i,low);
+            high+=i;
         }
-        int low{m},high{total_sum},ans{total_sum};
+        int ans = high;
+        if(n == k) return low;
         while(low<=high){
-            int mid = low+((high-low)/2);
-            int k = validWeight(weights,mid,days);
-            cout<<"Low->"<<low<<" high->"<<high<<" Weight ->"<<k<<endl;
-            if(k!=-1){
-                ans = min(ans,mid);
+            int mid = low + ((high-low)/2);
+            bool val = isValid(nums, mid,k);
+            if(val){
+                ans = min(mid,ans);
                 high = mid-1;
             }
             else low = mid+1;
         }
         return ans;
-
     }
 };
