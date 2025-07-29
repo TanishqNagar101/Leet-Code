@@ -36,16 +36,7 @@ public:
                 l2 = l2->next;
             }
         }
-        while(l1){
-            dummy->next = l1;
-            dummy = dummy->next;
-            l1 = l1->next;
-        }
-        while(l2){
-            dummy->next=l2;
-            dummy = dummy->next;
-            l2 = l2->next;
-        }
+        dummy->next = l1?l1:l2;
         return temp.next;
     }
     ListNode* sortList(ListNode* head) {
