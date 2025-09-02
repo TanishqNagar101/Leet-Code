@@ -26,6 +26,7 @@ public:
         ListNode* b=(l2);
         int carry=0;
         ListNode* ans=nullptr;
+        ListNode* t=ans;
         while(a || b || carry){
             int temp = carry;
             if(carry>0) carry=0;
@@ -43,10 +44,17 @@ public:
             }
             cout<<temp<<endl;
             ListNode* n = new ListNode(temp);
-            n->next=ans;
-            ans=n;
+            if(!ans){
+                ans=n;
+                t=n;
+            }
+            else{
+                t->next=n;
+                t=t->next;
+            }
+            
         }
-        ans = rev(ans);
+        // ans = rev(ans);
         return ans;
     }
 };
