@@ -44,8 +44,6 @@ public:
             cnt++;
             end=end->next;
             if(cnt == z){
-                cout<<"Iteration: "<<it++<<endl;
-                print(ans);
                 cnt=0;
                 ListNode* k = rev(start,z);
                 if(!ans){
