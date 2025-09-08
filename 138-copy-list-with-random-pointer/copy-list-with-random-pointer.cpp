@@ -17,53 +17,41 @@ public:
 class Solution {
 public:
 
-    Node* nextcreater(Node* head){
-        Node* ans = new Node(-1);
-        Node* k = ans;
-        while(head){
-            Node* temp = new Node(head->val);
-            k->next = temp;
-            k=k->next;
-            head=head->next;
-        }
-        return ans->next;
-    }
-
-    int distance(Node* h, Node* k){
-        int i=0;
-        while(h!=k){
-            h=h->next;
-            i++;
-        }
-        return i;
-    }
-
-    void randomcreater(Node* head,Node* orig){
-        Node* main = orig;
-        Node* copy = head;
-        while(orig){
-            if(orig->random != NULL){
-                int d = distance(main,orig->random);
-                cout<<"For Node: "<<orig->val<<" with d = "<<d<<endl;
-                int i=0;
-                Node* temp = copy;
-                while(i<d){
-                    temp = temp->next;
-                    i++;
-                }
-                head->random = temp;
-                // cout<<i<<" "<<d<<endl;
-                // cout<<"Node: "<<head->val<<" Random: "<<head->random->val<<endl;
-            }
-            orig=orig->next;
-            head=head->next;
-        }
-    }
-
     Node* copyRandomList(Node* head) {
-        Node* ans = nextcreater(head);
-        // cout<<head->random;
-        randomcreater(ans,head);
-        return ans;
+        if (!head) return nullptr;
+
+        // Step 1: Insert cloned nodes after each original node
+        Node* temp = head;
+        while (temp) {
+            Node* newNode = new Node(temp->val);
+            newNode->next = temp->next;
+            temp->next = newNode;
+            temp = newNode->next;
+        }
+
+        // Step 2: Set random pointers of cloned nodes
+        temp = head;
+        while (temp) {
+            if (temp->random) {
+                temp->next->random = temp->random->next;
+            }
+            temp = temp->next->next;
+        }
+
+        // Step 3: Separate original and cloned lists
+        Node* dummy = new Node(0);
+        Node* copyTail = dummy;
+        temp = head;
+
+        while (temp) {
+            Node* clone = temp->next;
+            copyTail->next = clone;
+            copyTail = clone;
+
+            temp->next = clone->next; // restore original
+            temp = temp->next;
+        }
+
+        return dummy->next;
     }
 };
