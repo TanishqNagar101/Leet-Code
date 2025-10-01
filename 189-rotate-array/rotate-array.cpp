@@ -10,11 +10,10 @@ public:
         }
     }
     void rotate(vector<int>& nums, int k) {
+        if(k == 0||k%nums.size()==0 ) return;
         k = k%nums.size();
+        std::rotate(nums.begin(),nums.end()-k,nums.end());
         
-        int end = nums.size()-k-1;
-        rev(nums,0,end);
-        rev(nums,end+1,nums.size()-1);
-        rev(nums,0,nums.size()-1);
+
     }
 };
