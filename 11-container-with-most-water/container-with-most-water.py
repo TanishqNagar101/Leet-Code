@@ -4,9 +4,7 @@ class Solution:
         j=len(height)-1
         i=0
         while(i<j):
-            temp=min(height[i],height[j])*(j-i)
-            if(temp>ans):
-                ans=temp
+            ans=max(ans,min(height[i],height[j])*(j-i))
             if(height[j]<=height[i]):
                 j-=1
             else:
